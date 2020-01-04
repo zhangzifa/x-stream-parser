@@ -1,0 +1,29 @@
+{
+  "name": "x-stream-parser",
+  "version": "1.0.0",
+  "description": "parser for self defined stream data",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint lib test *.js",
+    "test": "mocha -t 5000 -R spec test/*.test.js",
+    "cov": "nyc --reporter=html --reporter=text --report=lcov mocha -t 5000 -R spec test/*.test.js",
+    "ut": "mocha -t 5000 -R spec"
+  },
+  "keywords": [
+    "parser",
+    "stream"
+  ],
+  "author": "tonyzzf@163.com",
+  "license": "MIT",
+  "devDependencies": {
+    "codecov": "^3.6.1",
+    "eslint": "^6.8.0",
+    "expect.js": "^0.3.1",
+    "mocha": "^6.2.2",
+    "nyc": "^15.0.0",
+    "buffer-equal": "^1.0.0"
+  },
+  "dependencies": {
+    "debug": "^4.1.1"
+  }
+}
