@@ -91,9 +91,8 @@ rcvdData(function(d) {
     parser.clear();
   }
 });
-
-
-
-
-
 ````
+
+# License
+
+The x-stream-parser is released under the MIT license.
