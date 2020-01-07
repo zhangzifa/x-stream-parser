@@ -1,11 +1,9 @@
 'use strict';
-const co = require('co');
 const expect = require('expect.js');
 const bufferEqual = require('buffer-equal');
 const Parser = require('../');
 
 const HEADER = Buffer.from([0xf1, 0xf1, 0xf1, 0xf1]);
-const EMPTY = Buffer.from([]);
 
 describe('basic function', function() {
   it('normal: new Parser with default parameter', function () {
@@ -160,6 +158,14 @@ describe('basic function', function() {
     }
   });
 
+  it('append data for fixed package', function() {
+    let sync = Buffer.from([0x57, 0x00, 0xff]);
+    let p = new Parser(sync, 0);
+    p.setFixLength(13);
+    p.append(Buffer.from([0x57, 0x00, 0xff, 0x32, 0x11, 0x22, 0x33, 0x44]));
+    p.append(Buffer.from([0xf1, 0x04, 0x00, 0x00, 0x06, 0x00, 0xff, 0xf1]));
+    expect(p.rcvd).to.be.ok();
+  });
 
   it('append data byte by byte ok', function() {
     let p = new Parser();
@@ -187,7 +193,6 @@ describe('basic function', function() {
     expect(bufferEqual(p.data, Buffer.from([1,2,3,4,5,6,7,8]))).to.be.ok();
     expect(bufferEqual(p.extra, Buffer.from([9]))).to.be.ok();
   });
-
 
   it('append data byte by byte with specified sync', function() {
     let sync = Buffer.from([0x11, 0x22, 0x33, 0x44, 0x55]);
